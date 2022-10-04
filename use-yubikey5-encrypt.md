@@ -1,15 +1,15 @@
-- [安装工具 gpg/ykman](#安装工具gpg/ykman)
-- [初始化 yubikey](#初始化yubikey)
-- [创建 GPG 密钥](#创建GPG密钥)
-- [将证书写入 yubikey](#将证书写入yubikey)
-- [在另一台电脑使用yubikey](#在另一台电脑使用yubikey)
+- [准备工作](#准备工作)
+- [GPG 密钥](#GPG密钥)
+- [yubikey 操作](#yubikey操作)
 - [加解密的使用](#加解密的使用)
 
 # 使用 yubikey 5 openpgp 加密数据
 
-## 安装工具gpg/ykman
+YubiKey 是由 Yubico 生产的身份认证设备，支持一次性密码（OTP）、公钥加密和身份认证，以及由FIDO联盟（FIDO U2F）开发的通用第二因素（U2F）等协议。
 
-### gpg
+## 准备工作
+
+### 安装 gpg
 
 ```
 https://gnupg.org/download/
@@ -24,7 +24,7 @@ https://gpgtools.org/
 本文选择安装 2.3.x 版本的 GPG
 
 
-### yubikey manager
+### 安装 yubikey manager
 
 ```
 https://www.yubico.com/support/download/yubikey-manager/
@@ -33,43 +33,7 @@ https://www.yubico.com/support/download/yubikey-manager/
 TODO
 
 
-## 初始化yubikey
-
-首次插入 yubikey 后修改管理密码
-
-```
-gpg --edit-card
-
-// 进入卡管理界面
-gpg/card> admin
-Admin commands are allowed
-
-// 修改密码
-gpg/card> passwd
-gpg: OpenPGP card no. D***************************0000 detected
-
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
-Q - quit
-
-Your selection?
-
-// 分别选择 1修改使用密码，3修改管理密码
-// 默认使用密码是 123456
-// 默认管理密码是 12345678
-
-gpg/card> name
-Cardholder's surname: Hello
-Cardholder's given name: World
-
-gpg/card> lang
-Language preferences: en
-```
-
-
-## 创建GPG密钥
+## GPG密钥
 
 
 ### 创建主密钥
@@ -368,8 +332,45 @@ gpg --armor --export --output hello-public.asc $KEYID
 gpg --armor --export-secret-subkeys --output hello-secret-sub.asc $KEYID
 ```
 
+## yubikey操作
 
-## 将证书写入yubikey
+### 初始化yubikey
+
+首次插入 yubikey 后修改管理密码
+
+```
+gpg --edit-card
+
+// 进入卡管理界面
+gpg/card> admin
+Admin commands are allowed
+
+// 修改密码
+gpg/card> passwd
+gpg: OpenPGP card no. D***************************0000 detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection?
+
+// 分别选择 1修改使用密码，3修改管理密码
+// 默认使用密码是 123456
+// 默认管理密码是 12345678
+
+gpg/card> name
+Cardholder's surname: Hello
+Cardholder's given name: World
+
+gpg/card> lang
+Language preferences: en
+```
+
+
+### 将证书写入yubikey
 
 注意：写入 yubikey 之后，本地的密钥将被移除，请确保备份或完全理解其安全逻辑
 
@@ -528,7 +529,7 @@ gpg --send-keys $KEYID
 https://keys.openpgp.org/search?q=hello.world@bituslabs.com
 ```
 
-## 在另一台电脑使用yubikey
+### 在另一台电脑使用yubikey
 
 ```
 // 找到公钥
