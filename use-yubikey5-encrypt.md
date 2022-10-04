@@ -591,25 +591,24 @@ Please note that the shown key validity is not necessarily correct
 unless you restart the program.
 ```
 
-// 从 yubikey 中同步密钥
+### 从 yubikey 中同步
 
 ```
 gpg --edit-card
 
-```
 
-```
 gpg/card> fetch
 gpg: requesting key from 'https://keys.openpgp.org/vks/v1/by-fingerprint/F3846BD341BC7A6B0392D3E07D187EED23E32758'
 gpg: Total number processed: 1
 gpg:              unchanged: 1
 ```
 
+## 加解密的使用
 
 ### 加密文件
 
-// 需要有 hello.world@bituslabs.com 的公钥
 ```
+// 需要有 hello.world@bituslabs.com 的公钥
 gpg --encrypt --recipient hello.world@bituslabs.com ./demo.txt
 ```
 
@@ -618,27 +617,25 @@ gpg --encrypt --recipient hello.world@bituslabs.com ./demo.txt
 
 ### 解密文件
 
-// 需要有 hello.world@bituslabs.com 的密钥
 ```
+// 需要有 hello.world@bituslabs.com 的密钥
 gpg --decrypt ./demo.txt.gpg
 ```
 
 
-### 使用 python 加解密文件
+### 使用 python 解密文件
 
 ```
 pip install python-gnupg
 ```
 
-// 参考文档
-
 ```
+// 参考文档
 https://gnupg.readthedocs.io/en/latest/
 ```
 
-// example
-
 ```
+// example
 import gnupg
 
 filename = './demo.txt.gpg'
