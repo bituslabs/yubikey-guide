@@ -344,25 +344,25 @@ ssb  rsa4096/7BB50A0B99FAD612
 ```
 
 
-### 备份密钥
+## 备份密钥
 
-// 备份主密钥
 ```
+// 备份主密钥
 gpg --armor --export-secret-key --output hello-secret.asc $KEYID 
 ```
 
-// 备份公钥
 ```
+// 备份公钥
 gpg --armor --export --output hello-public.asc $KEYID 
 ```
 
-// 备份子密钥
 ```
+// 备份子密钥
 gpg --armor --export-secret-subkeys --output hello-secret-sub.asc $KEYID
 ```
 
 
-### 将证书写入 yubikey
+## 将证书写入 yubikey
 
 ```
 gpg --edit-key $KEYID
@@ -507,7 +507,7 @@ ssb* rsa4096/7BB50A0B99FAD612
 [ultimate] (1). HelloWorld <hello.world@bituslabs.com>
 ``` 
 
-### 上传公钥到 Key Server
+## 上传公钥到 Key Server
 
 ```
 gpg --send-keys $KEYID
@@ -519,27 +519,22 @@ gpg --send-keys $KEYID
 https://keys.openpgp.org/search?q=hello.world@bituslabs.com
 ```
 
-### 在另一台电脑使用 yubikey
+## 在另一台电脑使用 yubikey
 
-// 找到公钥
 ```
+// 找到公钥
 gpg --search hello.world@bituslabs.com
 ```
 
 or
 
-// 直接导入备份公钥
 ```
+// 直接导入备份公钥
 gpg --import hello-public.asc 
 ```
 
-// 编辑公钥
-gpg --edit-key $KEYID
-
 ```
-
 // 设置信任
-```
 % gpg --edit-key $KEYID
 gpg (GnuPG) 2.3.7; Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
