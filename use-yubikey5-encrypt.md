@@ -1,3 +1,5 @@
+[TOC]
+
 # 使用 yubikey 5 openpgp 加密数据
 
 ## 安装工具 gpg / ykman
@@ -39,7 +41,7 @@ Admin commands are allowed
 
 // 修改密码
 gpg/card> passwd
-gpg: OpenPGP card no. D2760001240100000006193164190000 detected
+gpg: OpenPGP card no. D***************************0000 detected
 
 1 - change PIN
 2 - unblock PIN
