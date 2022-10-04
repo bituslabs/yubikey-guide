@@ -1,8 +1,22 @@
 - [准备工作](#准备工作)
-- [GPG 密钥](#GPG密钥)
-- [yubikey 操作](#yubikey操作)
+  - [安装 gpg](#安装 gpg)
+  - [安装 yubikey manager](#安装 yubikey manager)
+- [GPG 密钥](#GPG 密钥)
+  - [创建主密钥](#创建主密钥)
+  - [创建子证书](#创建子证书)
+  - [备份密钥](#备份密钥)
+- [yubikey 操作](#yubikey 操作)
+  - [初始化 yubikey](#初始化 yubikey)
+  - [将证书写入 yubikey](#将证书写入 yubikey)
+  - [上传公钥到 Key Server](#上传公钥到 Key Server)
+  - [在另一台电脑使用 yubikey](#在另一台电脑使用 yubikey)
+  - [从 yubikey 中同步](#从 yubikey 中同步)
 - [加解密的使用](#加解密的使用)
+  - [加密文件](#加密文件)
+  - [解密文件](#解密文件)
+  - [使用 python 解密文件或数据](#使用 python 解密文件或数据)
 
+  
 # 使用 yubikey 5 openpgp 加密数据
 
 YubiKey 是由 Yubico 生产的身份认证设备，支持一次性密码（OTP）、公钥加密和身份认证，以及由FIDO联盟（FIDO U2F）开发的通用第二因素（U2F）等协议。
@@ -33,7 +47,7 @@ https://www.yubico.com/support/download/yubikey-manager/
 TODO
 
 
-## GPG密钥
+## GPG 密钥
 
 
 ### 创建主密钥
@@ -332,9 +346,9 @@ gpg --armor --export --output hello-public.asc $KEYID
 gpg --armor --export-secret-subkeys --output hello-secret-sub.asc $KEYID
 ```
 
-## yubikey操作
+## yubikey 操作
 
-### 初始化yubikey
+### 初始化 yubikey
 
 首次插入 yubikey 后修改管理密码
 
@@ -370,7 +384,7 @@ Language preferences: en
 ```
 
 
-### 将证书写入yubikey
+### 将证书写入 yubikey
 
 注意：写入 yubikey 之后，本地的密钥将被移除，请确保备份或完全理解其安全逻辑
 
@@ -529,7 +543,7 @@ gpg --send-keys $KEYID
 https://keys.openpgp.org/search?q=hello.world@bituslabs.com
 ```
 
-### 在另一台电脑使用yubikey
+### 在另一台电脑使用 yubikey
 
 ```
 // 找到公钥
