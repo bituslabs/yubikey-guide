@@ -1,4 +1,4 @@
-# 使用 yubikey 5 加密数据
+# 使用 yubikey 5 openpgp 加密数据
 
 ## 安装工具 gpg / ykman
 
@@ -28,7 +28,7 @@ TODO
 
 ## 初始化 yubikey
 
-修改管理密码
+首次插入 yubikey 后修改管理密码
 
 ```
 gpg --edit-card
@@ -344,7 +344,7 @@ ssb  rsa4096/7BB50A0B99FAD612
 ```
 
 
-## 备份密钥
+### 备份密钥
 
 ```
 // 备份主密钥
@@ -363,6 +363,8 @@ gpg --armor --export-secret-subkeys --output hello-secret-sub.asc $KEYID
 
 
 ## 将证书写入 yubikey
+
+注意：写入 yubikey 之后，本地的密钥将被移除，请确保备份或完全理解其安全逻辑
 
 ```
 gpg --edit-key $KEYID
@@ -507,7 +509,7 @@ ssb* rsa4096/7BB50A0B99FAD612
 [ultimate] (1). HelloWorld <hello.world@bituslabs.com>
 ``` 
 
-## 上传公钥到 Key Server
+### 上传公钥到 Key Server
 
 ```
 gpg --send-keys $KEYID
@@ -598,7 +600,6 @@ gpg --edit-card
 
 
 gpg/card> fetch
-gpg: requesting key from 'https://keys.openpgp.org/vks/v1/by-fingerprint/F3846BD341BC7A6B0392D3E07D187EED23E32758'
 gpg: Total number processed: 1
 gpg:              unchanged: 1
 ```
@@ -623,7 +624,7 @@ gpg --decrypt ./demo.txt.gpg
 ```
 
 
-### 使用 python 解密文件
+### 使用 python 解密文件或数据
 
 ```
 pip install python-gnupg
